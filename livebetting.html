@@ -1,0 +1,1343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Betting - Sue Betting Site</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <style>
+        /* Base Styles */
+        :root {
+            --primary: #0d6efd;
+            --primary-dark: #0a58ca;
+            --primary-light: #cfe2ff;
+            --dark: #0d1117;
+            --light: #f8f9fa;
+            --gray: #6c757d;
+            --light-gray: #dee2e6;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--light);
+            color: #333;
+        }
+        
+        /* Navbar Styles */
+        .navbar {
+            background-color: var(--dark);
+            padding: 15px 0;
+        }
+        
+        .navbar-brand {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        
+        .brand-text {
+            color: var(--primary);
+        }
+        
+        .nav-link {
+            color: white !important;
+            font-weight: 500;
+            margin: 0 10px;
+            transition: color 0.3s;
+        }
+        
+        .nav-link:hover, .nav-link.active {
+            color: var(--primary) !important;
+        }
+        
+        .btn-outline-light {
+            border-color: var(--light);
+            color: var(--light);
+        }
+        
+        .btn-outline-light:hover {
+            background-color: var(--light);
+            color: var(--dark);
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            border-color: var(--primary);
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            border-color: var(--primary-dark);
+        }
+        
+        /* Live Betting Header */
+        .live-betting-header {
+            background: linear-gradient(rgba(13, 17, 23, 0.8), rgba(13, 17, 23, 0.8)), url('https://via.placeholder.com/1920x400');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 60px 0;
+            position: relative;
+        }
+        
+        .live-betting-header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: white;
+        }
+        
+        .live-betting-header p {
+            font-size: 1.2rem;
+            margin-bottom: 0;
+            max-width: 700px;
+        }
+        
+        .live-indicator-large {
+            display: flex;
+            align-items: center;
+            font-weight: 600;
+            font-size: 1.2rem;
+            color: white;
+            background-color: rgba(255, 77, 77, 0.2);
+            padding: 8px 15px;
+            border-radius: 30px;
+            display: inline-flex;
+            margin-bottom: 20px;
+        }
+        
+        .pulse-large {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background-color: #ff4d4d;
+            margin-right: 10px;
+            position: relative;
+        }
+        
+        .pulse-large::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background-color: rgba(255, 77, 77, 0.7);
+            animation: pulse 1.5s infinite;
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(2.5);
+                opacity: 0;
+            }
+        }
+        
+        /* Section Styles */
+        .section-title {
+            color: var(--primary);
+            font-weight: 700;
+            margin-bottom: 30px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background-color: var(--primary);
+        }
+        
+        section {
+            padding: 50px 0;
+        }
+        
+        /* Filter Section */
+        .filter-section {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-top: -30px;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .filter-btn {
+            padding: 10px 20px;
+            border-radius: 30px;
+            margin: 0 5px 10px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .filter-btn.active {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        
+        .filter-btn:not(.active) {
+            background-color: white;
+            color: var(--dark);
+            border: 1px solid var(--light-gray);
+        }
+        
+        .filter-btn:not(.active):hover {
+            background-color: var(--light);
+            color: var(--primary);
+            border-color: var(--primary-light);
+        }
+        
+        .search-box {
+            position: relative;
+        }
+        
+        .search-box input {
+            padding: 10px 15px 10px 40px;
+            border-radius: 30px;
+            border: 1px solid var(--light-gray);
+            width: 100%;
+        }
+        
+        .search-box i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gray);
+        }
+        
+        /* Live Match Card */
+        .live-match-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .live-match-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .match-header {
+            background-color: var(--dark);
+            color: white;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .match-sport {
+            display: flex;
+            align-items: center;
+        }
+        
+        .match-sport i {
+            margin-right: 10px;
+            color: var(--primary);
+        }
+        
+        .match-time {
+            display: flex;
+            align-items: center;
+            font-weight: 600;
+        }
+        
+        .match-time .badge {
+            margin-right: 10px;
+        }
+        
+        .match-content {
+            padding: 20px;
+        }
+        
+        .match-teams {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .team {
+            text-align: center;
+            flex: 1;
+        }
+        
+        .team-logo {
+            width: 60px;
+            height: 60px;
+            background-color: var(--light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 10px;
+            font-size: 1.5rem;
+            color: var(--dark);
+        }
+        
+        .team-name {
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+        
+        .team-score {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .match-separator {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0 20px;
+        }
+        
+        .vs {
+            font-weight: 700;
+            color: var(--gray);
+            margin: 10px 0;
+        }
+        
+        .match-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            padding: 10px 0;
+            border-top: 1px solid var(--light-gray);
+            border-bottom: 1px solid var(--light-gray);
+        }
+        
+        .stat {
+            text-align: center;
+            flex: 1;
+        }
+        
+        .stat-value {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--dark);
+        }
+        
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--gray);
+        }
+        
+        .match-odds {
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .odds-btn {
+            flex: 1;
+            margin: 0 5px;
+            padding: 10px;
+            border-radius: 8px;
+            font-weight: 500;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border: 1px solid var(--light-gray);
+            background-color: white;
+            color: var(--dark);
+            transition: all 0.3s;
+        }
+        
+        .odds-btn:hover {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        
+        .odds-label {
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+        
+        .odds-value {
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+        
+        /* Live Betting Table */
+        .live-betting {
+            background-color: var(--dark);
+            color: white;
+            padding: 60px 0;
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
+        .live-indicator {
+            display: flex;
+            align-items: center;
+            font-weight: 600;
+            color: #ff9800;
+        }
+        
+        .pulse {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: #ff4d4d;
+            margin-right: 10px;
+            position: relative;
+        }
+        
+        .pulse::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background-color: rgba(255, 77, 77, 0.7);
+            animation: pulse 1.5s infinite;
+        }
+        
+        .live-table {
+            color: white;
+        }
+        
+        .live-table th {
+            border-color: #444;
+            color: var(--light-gray);
+            font-weight: 500;
+            padding: 15px 10px;
+        }
+        
+        .live-table td {
+            border-color: #444;
+            vertical-align: middle;
+            padding: 15px 10px;
+        }
+        
+        .sport-icon {
+            display: inline-block;
+            width: 30px;
+            text-align: center;
+            margin-right: 10px;
+            color: var(--primary);
+        }
+        
+        .event-name {
+            font-weight: 500;
+        }
+        
+        .score-display {
+            font-weight: 700;
+            color: white;
+        }
+        
+        .btn-sm.btn-outline-primary {
+            border-color: var(--primary-light);
+            color: white;
+        }
+        
+        .btn-sm.btn-outline-primary:hover {
+            background-color: var(--primary);
+            border-color: var(--primary);
+        }
+        
+        /* Bet Slip */
+        .bet-slip {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 20px;
+        }
+        
+        .bet-slip-header {
+            background-color: var(--primary);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 10px 10px 0 0;
+            font-weight: 600;
+            font-size: 1.2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .bet-count {
+            background-color: white;
+            color: var(--primary);
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            font-weight: 700;
+        }
+        
+        .bet-slip-body {
+            padding: 20px;
+        }
+        
+        .empty-slip {
+            text-align: center;
+            padding: 30px 0;
+            color: var(--gray);
+        }
+        
+        .empty-slip i {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            color: var(--light-gray);
+        }
+        
+        .bet-item {
+            border-bottom: 1px solid var(--light-gray);
+            padding: 15px 0;
+        }
+        
+        .bet-item:last-child {
+            border-bottom: none;
+        }
+        
+        .bet-team {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .bet-match {
+            font-size: 0.9rem;
+            color: var(--gray);
+            margin-bottom: 10px;
+        }
+        
+        .bet-details {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .bet-type {
+            font-size: 0.9rem;
+            background-color: var(--light);
+            padding: 3px 8px;
+            border-radius: 4px;
+        }
+        
+        .bet-odds {
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .bet-remove {
+            color: #dc3545;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: transform 0.2s;
+        }
+        
+        .bet-remove:hover {
+            transform: scale(1.2);
+        }
+        
+        .bet-slip-footer {
+            background-color: var(--light);
+            padding: 20px;
+            border-radius: 0 0 10px 10px;
+        }
+        
+        .stake-input {
+            margin-bottom: 15px;
+        }
+        
+        .stake-input label {
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .stake-input .input-group-text {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        
+        .bet-summary {
+            margin-bottom: 20px;
+        }
+        
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .summary-item.total {
+            font-weight: 700;
+            font-size: 1.1rem;
+            border-top: 1px solid var(--light-gray);
+            padding-top: 10px;
+            margin-top: 10px;
+        }
+        
+        .btn-place-bet {
+            background-color: #28a745;
+            border-color: #28a745;
+            color: white;
+            font-weight: 600;
+            padding: 12px;
+            width: 100%;
+            transition: all 0.3s;
+        }
+        
+        .btn-place-bet:hover {
+            background-color: #218838;
+            border-color: #218838;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
+        }
+        
+        /* Live Stats Section */
+        .live-stats-section {
+            background-color: var(--light);
+            padding: 60px 0;
+        }
+        
+        .stats-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            height: 100%;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .stats-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .stats-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .stats-icon {
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary-light);
+            color: var(--primary);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-right: 15px;
+        }
+        
+        .stats-title {
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 0;
+        }
+        
+        .stats-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        .stats-description {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        /* Footer */
+        .footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 70px 0 20px;
+        }
+        
+        .footer h5 {
+            color: var(--primary);
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        
+        .footer-links {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: var(--light-gray);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+        
+        .social-icons {
+            margin-top: 20px;
+        }
+        
+        .social-icons a {
+            display: inline-block;
+            width: 36px;
+            height: 36px;
+            background-color: #333;
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 36px;
+            margin-right: 10px;
+            transition: all 0.3s;
+        }
+        
+        .social-icons a:hover {
+            background-color: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid #444;
+            padding-top: 20px;
+            margin-top: 30px;
+            text-align: center;
+            color: var(--gray);
+        }
+        
+        /* Responsive Adjustments */
+        @media (max-width: 992px) {
+            .bet-slip {
+                margin-top: 30px;
+                position: static;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .live-betting-header h1 {
+                font-size: 2rem;
+            }
+            
+            .match-teams {
+                flex-direction: column;
+            }
+            
+            .team {
+                margin-bottom: 20px;
+            }
+            
+            .match-separator {
+                margin: 0;
+                padding: 0;
+            }
+            
+            .vs {
+                margin: 5px 0 15px;
+            }
+            
+            .match-odds {
+                flex-wrap: wrap;
+            }
+            
+            .odds-btn {
+                flex: 0 0 calc(50% - 10px);
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <span class="brand-text">SUE BETTING</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Sports</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="livebetting.html">Live Betting</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Casino</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Promotions</a>
+                    </li>
+                </ul>
+                <div class="ms-3">
+                    <button class="btn btn-outline-light me-2" onclick="window.location.href='login.html'">Login</button>
+                    <button class="btn btn-primary" onclick="window.location.href='register.html'">Register</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Live Betting Header -->
+    <section class="live-betting-header">
+        <div class="container">
+            <div class="live-indicator-large">
+                <span class="pulse-large"></span> LIVE BETTING
+            </div>
+            <h1>Experience the Thrill of Live Betting</h1>
+            <p>Place bets on ongoing matches across multiple sports with real-time odds and statistics. Feel the excitement as the action unfolds!</p>
+        </div>
+    </section>
+
+    <!-- Filter Section -->
+    <section class="py-4">
+        <div class="container">
+            <div class="filter-section">
+                <div class="row align-items-center">
+                    <div class="col-md-8">
+                        <div class="d-flex flex-wrap">
+                            <button class="filter-btn active">All Sports</button>
+                            <button class="filter-btn">Football</button>
+                            <button class="filter-btn">Basketball</button>
+                            <button class="filter-btn">Tennis</button>
+                            <button class="filter-btn">Hockey</button>
+                            <button class="filter-btn">Baseball</button>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="search-box">
+                            <i class="fas fa-search"></i>
+                            <input type="text" class="form-control" placeholder="Search events...">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Live Matches -->
+    <section>
+        <div class="container">
+            <h2 class="section-title">Featured Live Matches</h2>
+            
+            <div class="row">
+                <div class="col-lg-8">
+                    <!-- Live Match Card 1 -->
+                    <div class="live-match-card">
+                        <div class="match-header">
+                            <div class="match-sport">
+                                <i class="fas fa-futbol"></i>
+                                <span>Football - Premier League</span>
+                            </div>
+                            <div class="match-time">
+                                <span class="badge bg-danger">LIVE</span>
+                                <span>65'</span>
+                            </div>
+                        </div>
+                        <div class="match-content">
+                            <div class="match-teams">
+                                <div class="team">
+                                    <div class="team-logo">
+                                        <i class="fas fa-shield-alt"></i>
+                                    </div>
+                                    <div class="team-name">Manchester United</div>
+                                    <div class="team-score">2</div>
+                                </div>
+                                <div class="match-separator">
+                                    <div class="vs">VS</div>
+                                </div>
+                                <div class="team">
+                                    <div class="team-logo">
+                                        <i class="fas fa-shield-alt"></i>
+                                    </div>
+                                    <div class="team-name">Liverpool</div>
+                                    <div class="team-score">1</div>
+                                </div>
+                            </div>
+                            
+                            <div class="match-stats">
+                                <div class="stat">
+                                    <div class="stat-value">8</div>
+                                    <div class="stat-label">Shots on Target</div>
+                                </div>
+                                <div class="stat">
+                                    <div class="stat-value">58%</div>
+                                    <div class="stat-label">Possession</div>
+                                </div>
+                                <div class="stat">
+                                    <div class="stat-value">5</div>
+                                    <div class="stat-label">Corners</div>
+                                </div>
+                                <div class="stat">
+                                    <div class="stat-value">2</div>
+                                    <div class="stat-label">Yellow Cards</div>
+                                </div>
+                            </div>
+                            
+                            <div class="match-odds">
+                                <button class="odds-btn">
+                                    <span class="odds-label">Man United</span>
+                                    <span class="odds-value">2.10</span>
+                                </button>
+                                <button class="odds-btn">
+                                    <span class="odds-label">Draw</span>
+                                    <span class="odds-value">3.40</span>
+                                </button>
+                                <button class="odds-btn">
+                                    <span class="odds-label">Liverpool</span>
+                                    <span class="odds-value">4.50</span>
+                                </button>
+                                <button class="odds-btn">
+                                    <span class="odds-label">Over 3.5</span>
+                                    <span class="odds-value">2.25</span>
+                                </button>
+                                <button class="odds-btn">
+                                    <span class="odds-label">Under 3.5</span>
+                                    <span class="odds-value">1.65</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Live Match Card 2 -->
+                    <div class="live-match-card">
+                        <div class="match-header">
+                            <div class="match-sport">
+                                <i class="fas fa-basketball-ball"></i>
+                                <span>Basketball - NBA</span>
+                            </div>
+                            <div class="match-time">
+                                <span class="badge bg-danger">LIVE</span>
+                                <span>Q3 8:24</span>
+                            </div>
+                        </div>
+                        <div class="match-content">
+                            <div class="match-teams">
+                                <div class="team">
+                                    <div class="team-logo">
+                                        <i class="fas fa-basketball-ball"></i>
+                                    </div>
+                                    <div class="team-name">Boston Celtics</div>
+                                    <div class="team-score">68</div>
+                                </div>
+                                <div class="match-separator">
+                                    <div class="vs">VS</div>
+                                </div>
+                                <div class="team">
+                                    <div class="team-logo">
+                                        <i class="fas fa-basketball-ball"></i>
+                                    </div>
+                                    <div class="team-name">Miami Heat</div>
+                                    <div class="team-score">72</div>
+                                </div>
+                            </div>
+                            
+                            <div class="match-stats">
+                                <div class="stat">
+                                    <div class="stat-value">42%</div>
+                                    <div class="stat-label">FG%</div>
+                                </div>
+                                <div class="stat">
+                                    <div class="stat-value">35%</div>
+                                    <div class="stat-label">3PT%</div>
+                                </div>
+                                <div class="stat">
+                                    <div class="stat-value">18</div>
+                                    <div class="stat-label">Assists</div>
+                                </div>
+                                <div class="stat">
+                                    <div class="stat-value">24</div>
+                                    <div class="stat-label">Rebounds</div>
+                                </div>
+                            </div>
+                            
+                            <div class="match-odds">
+                                <button class="odds-btn">
+                                    <span class="odds-label">Celtics</span>
+                                    <span class="odds-value">2.25</span>
+                                </button>
+                                <button class="odds-btn">
+                                    <span class="odds-label">Heat</span>
+                                    <span class="odds-value">1.65</span>
+                                </button>
+                                <button class="odds-btn">
+                                    <span class="odds-label">Over 210.5</span>
+                                    <span class="odds-value">1.90</span>
+                                </button>
+                                <button class="odds-btn">
+                                    <span class="odds-label">Under 210.5</span>
+                                    <span class="odds-value">1.90</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Live Match Card 3 -->
+                    <div class="live-match-card">
+                        <div class="match-header">
+                            <div class="match-sport">
+                                <i class="fas fa-table-tennis"></i>
+                                <span>Tennis - ATP</span>
+                            </div>
+                            <div class="match-time">
+                                <span class="badge bg-danger">LIVE</span>
+                                <span>Set 2</span>
+                            </div>
+                        </div>
+                        <div class="match-content">
+                            <div class="match-teams">
+                                <div class="team">
+                                    <div class="team-logo">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                    <div class="team-name">Roger Federer</div>
+                                    <div class="team-score">1</div>
+                                </div>
+                                <div class="match-separator">
+                                    <div class="vs">VS</div>
+                                </div>
+                                <div class="team">
+                                    <div class="team-logo">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                    <div class="team-name">Andy Murray</div>
+                                    <div class="team-score">0</div>
+                                </div>
+                            </div>
+                            
+                            <div class="match-stats">
+                                <div class="stat">
+                                    <div class="stat-value">8</div>
+                                    <div class="stat-label">Aces</div>
+                                </div>
+                                <div class="stat">
+                                    <div class="stat-value">2</div>
+                                    <div class="stat-label">Double Faults</div>
+                                </div>
+                                <div class="stat">
+                                    <div class="stat-value">65%</div>
+                                    <div class="stat-label">1st Serve %</div>
+                                </div>
+                                <div class="stat">
+                                    <div class="stat-value">24</div>
+                                    <div class="stat-label">Winners</div>
+                                </div>
+                            </div>
+                            
+                            <div class="match-odds">
+                                <button class="odds-btn">
+                                    <span class="odds-label">Federer</span>
+                                    <span class="odds-value">1.45</span>
+                                </button>
+                                <button class="odds-btn">
+                                    <span class="odds-label">Murray</span>
+                                    <span class="odds-value">2.75</span>
+                                </button>
+                                <button class="odds-btn">
+                                    <span class="odds-label">Federer 2-0</span>
+                                    <span class="odds-value">1.90</span>
+                                </button>
+                                <button class="odds-btn">
+                                    <span class="odds-label">Federer 2-1</span>
+                                    <span class="odds-value">3.50</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4">
+                    <!-- Bet Slip -->
+                    <div class="bet-slip">
+                        <div class="bet-slip-header">
+                            <span>Bet Slip</span>
+                            <span class="bet-count">0</span>
+                        </div>
+                        <div class="bet-slip-body">
+                            <div class="empty-slip">
+                                <i class="fas fa-ticket-alt"></i>
+                                <p>Your bet slip is empty</p>
+                                <p>Click on any odds to add selections to your bet slip</p>
+                            </div>
+                            
+                            <!-- Example of bet items (hidden by default) -->
+                            <div class="bet-item" style="display: none;">
+                                <div class="bet-team">Manchester United</div>
+                                <div class="bet-match">Manchester United vs Liverpool</div>
+                                <div class="bet-details">
+                                    <span class="bet-type">Win</span>
+                                    <span class="bet-odds">2.10</span>
+                                    <span class="bet-remove"><i class="fas fa-times-circle"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bet-slip-footer">
+                            <div class="stake-input">
+                                <label for="stake">Stake Amount</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">$</span>
+                                    <input type="number" class="form-control" id="stake" placeholder="0.00" min="1">
+                                </div>
+                            </div>
+                            
+                            <div class="bet-summary">
+                                <div class="summary-item">
+                                    <span>Total Odds:</span>
+                                    <span>0.00</span>
+                                </div>
+                                <div class="summary-item">
+                                    <span>Potential Winnings:</span>
+                                    <span>$0.00</span>
+                                </div>
+                                <div class="summary-item total">
+                                    <span>Total Stake:</span>
+                                    <span>$0.00</span>
+                                </div>
+                            </div>
+                            
+                            <button class="btn btn-place-bet" disabled>Place Bet</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- All Live Events -->
+    <section class="live-betting">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">All Live Events</h2>
+                <span class="live-indicator">
+                    <span class="pulse"></span> LIVE NOW
+                </span>
+            </div>
+            <div class="table-responsive">
+                <table class="table live-table">
+                    <thead>
+                        <tr>
+                            <th>Event</th>
+                            <th>Time</th>
+                            <th>Score</th>
+                            <th colspan="3">Odds</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <span class="sport-icon"><i class="fas fa-futbol"></i></span>
+                                <span class="event-name">Real Madrid vs Barcelona</span>
+                            </td>
+                            <td>65'</td>
+                            <td><span class="score-display">2-1</span></td>
+                            <td><button class="btn btn-sm btn-outline-primary">1 <span class="odds">3.20</span></button></td>
+                            <td><button class="btn btn-sm btn-outline-primary">X <span class="odds">2.10</span></button></td>
+                            <td><button class="btn btn-sm btn-outline-primary">2 <span class="odds">4.50</span></button></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="sport-icon"><i class="fas fa-basketball-ball"></i></span>
+                                <span class="event-name">Boston Celtics vs Miami Heat</span>
+                            </td>
+                            <td>Q3</td>
+                            <td><span class="score-display">68-72</span></td>
+                            <td><button class="btn btn-sm btn-outline-primary">1 <span class="odds">2.25</span></button></td>
+                            <td colspan="2"><button class="btn btn-sm btn-outline-primary">2 <span class="odds">1.65</span></button></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="sport-icon"><i class="fas fa-table-tennis"></i></span>
+                                <span class="event-name">Federer vs Murray</span>
+                            </td>
+                            <td>Set 2</td>
+                            <td><span class="score-display">1-0</span></td>
+                            <td><button class="btn btn-sm btn-outline-primary">1 <span class="odds">1.45</span></button></td>
+                            <td colspan="2"><button class="btn btn-sm btn-outline-primary">2 <span class="odds">2.75</span></button></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="sport-icon"><i class="fas fa-futbol"></i></span>
+                                <span class="event-name">Bayern Munich vs PSG</span>
+                            </td>
+                            <td>72'</td>
+                            <td><span class="score-display">2-1</span></td>
+                            <td><button class="btn btn-sm btn-outline-primary">1 <span class="odds">1.45</span></button></td>
+                            <td><button class="btn btn-sm btn-outline-primary">X <span class="odds">4.50</span></button></td>
+                            <td><button class="btn btn-sm btn-outline-primary">2 <span class="odds">7.20</span></button></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="sport-icon"><i class="fas fa-hockey-puck"></i></span>
+                                <span class="event-name">Toronto Maple Leafs vs Montreal Canadiens</span>
+                            </td>
+                            <td>P2</td>
+                            <td><span class="score-display">2-3</span></td>
+                            <td><button class="btn btn-sm btn-outline-primary">1 <span class="odds">2.80</span></button></td>
+                            <td colspan="2"><button class="btn btn-sm btn-outline-primary">2 <span class="odds">1.45</span></button></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="sport-icon"><i class="fas fa-baseball-ball"></i></span>
+                                <span class="event-name">NY Yankees vs Boston Red Sox</span>
+                            </td>
+                            <td>5th</td>
+                            <td><span class="score-display">3-2</span></td>
+                            <td><button class="btn btn-sm btn-outline-primary">1 <span class="odds">1.75</span></button></td>
+                            <td colspan="2"><button class="btn btn-sm btn-outline-primary">2 <span class="odds">2.10</span></button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="text-center mt-4">
+                <button class="btn btn-outline-light">Load More Events</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Live Stats Section -->
+    <section class="live-stats-section">
+        <div class="container">
+            <h2 class="section-title mb-4">Live Betting Stats</h2>
+            <div class="row">
+                <div class="col-md-3 mb-4">
+                    <div class="stats-card">
+                        <div class="stats-header">
+                            <div class="stats-icon">
+                                <i class="fas fa-bolt"></i>
+                            </div>
+                            <h3 class="stats-title">Live Events</h3>
+                        </div>
+                        <div class="stats-value">42</div>
+                        <p class="stats-description">Currently active events across all sports</p>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <div class="stats-card">
+                        <div class="stats-header">
+                            <div class="stats-icon">
+                                <i class="fas fa-futbol"></i>
+                            </div>
+                            <h3 class="stats-title">Football</h3>
+                        </div>
+                        <div class="stats-value">18</div>
+                        <p class="stats-description">Live football matches from top leagues</p>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <div class="stats-card">
+                        <div class="stats-header">
+                            <div class="stats-icon">
+                                <i class="fas fa-basketball-ball"></i>
+                            </div>
+                            <h3 class="stats-title">Basketball</h3>
+                        </div>
+                        <div class="stats-value">12</div>
+                        <p class="stats-description">NBA, Euroleague and other basketball events</p>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <div class="stats-card">
+                        <div class="stats-header">
+                            <div class="stats-icon">
+                                <i class="fas fa-trophy"></i>
+                            </div>
+                            <h3 class="stats-title">Other Sports</h3>
+                        </div>
+                        <div class="stats-value">12</div>
+                        <p class="stats-description">Tennis, hockey, baseball and more</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <h5>SUE BETTING</h5>
+                    <p>The ultimate destination for sports betting enthusiasts. Bet responsibly.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-2 mb-4">
+                    <h5>Sports</h5>
+                    <ul class="footer-links">
+                        <li><a href="#">Football</a></li>
+                        <li><a href="#">Basketball</a></li>
+                        <li><a href="#">Tennis</a></li>
+                        <li><a href="#">Baseball</a></li>
+                        <li><a href="#">Hockey</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-2 mb-4">
+                    <h5>Quick Links</h5>
+                    <ul class="footer-links">
+                        <li><a href="#">Live Betting</a></li>
+                        <li><a href="#">Casino</a></li>
+                        <li><a href="#">Promotions</a></li>
+                        <li><a href="#">Results</a></li>
+                        <li><a href="#">Statistics</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5>Support</h5>
+                    <ul class="footer-links">
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Responsible Gambling</a></li>
+                        <li><a href="#">Terms & Conditions</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2023 Sue Betting. All rights reserved. 18+ Gamble Responsibly.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
