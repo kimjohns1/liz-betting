@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liz Betting - Promotions & Bonuses</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <style>
+        :root {
+            --primary: #9c27b0;
+            --primary-dark: #7b1fa2;
+            --primary-light: #e1bee7;
+            --secondary: #ff9800;
+            --dark: #212121;
+            --light: #f5f5f5;
+            --gray: #757575;
+            --light-gray: #eeeeee;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+        }
+        
+        /* Navbar Styles */
+        .navbar {
+            background-color: var(--dark);
+            padding: 15px 0;
+        }
+        
+        .navbar-brand {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary) !important;
+        }
+        
+        .nav-link {
+            color: white !important;
+            font-weight: 500;
+            margin: 0 10px;
+            transition: color 0.3s;
+        }
+        
+        .nav-link:hover, .nav-link.active {
+            color: var(--primary) !important;
+        }
+        
+        .btn-outline-light {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+        
+        .btn-outline-light:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            border-color: var(--primary);
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            border-color: var(--primary-dark);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(33, 33, 33, 0.8), rgba(33, 33, 33, 0.8)), url('/placeholder.svg?height=800&width=1600');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 0;
+            margin-bottom: 50px;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+        
+        /* Section Styles */
+        .section-title {
+            color: var(--primary);
+            font-weight: 700;
+            margin-bottom: 30px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background-color: var(--secondary);
+        }
+        
+        section {
+            padding: 50px 0;
+        }
+        
+        /* Promotion Card Styles */
+        .promotion-card {
+            border: none;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            height: 100%;
+            margin-bottom: 30px;
+        }
+        
+        .promotion-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .promotion-card .card-header {
+            background: linear-gradient(135deg, var(--primary-light), var(--primary));
+            color: white;
+            padding: 20px;
+            border: none;
+        }
+        
+        .promotion-card .card-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0;
+        }
+        
+        .promotion-card .card-body {
+            padding: 25px;
+        }
+        
+        .promotion-card .promo-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .promotion-card .promo-description {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+        
+        .promotion-card .promo-terms {
+            font-size: 0.85rem;
+            color: var(--gray);
+            margin-bottom: 20px;
+        }
+        
+        .promotion-card .btn-claim {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            font-weight: 600;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        
+        .promotion-card .btn-claim:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        .promotion-card .badge-featured {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: var(--secondary);
+            color: white;
+            padding: 8px 15px;
+            font-weight: 600;
+            border-radius: 5px;
+            z-index: 10;
+        }
+        
+        .promotion-card .promo-expiry {
+            display: inline-block;
+            background-color: var(--light-gray);
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+        
+        /* VIP Program Styles */
+        .vip-section {
+            background-color: var(--dark);
+            color: white;
+            padding: 70px 0;
+        }
+        
+        .vip-card {
+            background: linear-gradient(135deg, #333, #111);
+            border-radius: 15px;
+            padding: 30px;
+            height: 100%;
+            transition: transform 0.3s;
+            border: 1px solid #444;
+        }
+        
+        .vip-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .vip-level {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+        
+        .vip-benefits {
+            list-style: none;
+            padding-left: 0;
+            margin-bottom: 25px;
+        }
+        
+        .vip-benefits li {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .vip-benefits i {
+            color: var(--secondary);
+            margin-right: 10px;
+        }
+        
+        .vip-card .btn-vip {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-weight: 600;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        
+        .vip-card .btn-vip:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        /* How to Claim Section */
+        .how-to-claim {
+            background-color: var(--light-gray);
+            padding: 70px 0;
+        }
+        
+        .step-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            height: 100%;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .step-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .step-number {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary);
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 700;
+            border-radius: 50%;
+            margin-bottom: 20px;
+        }
+        
+        .step-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+        
+        /* Testimonials Section */
+        .testimonials {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            color: white;
+            padding: 70px 0;
+        }
+        
+        .testimonial-card {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .testimonial-card::before {
+            content: '\201C';
+            font-size: 5rem;
+            position: absolute;
+            top: -20px;
+            left: 10px;
+            color: rgba(255, 255, 255, 0.2);
+            font-family: Georgia, serif;
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .testimonial-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 15px;
+            object-fit: cover;
+        }
+        
+        .testimonial-name {
+            font-weight: 700;
+            margin-bottom: 0;
+        }
+        
+        .testimonial-won {
+            font-size: 0.9rem;
+            color: var(--secondary);
+        }
+        
+        /* FAQ Section */
+        .faq-section {
+            padding: 70px 0;
+        }
+        
+        .accordion-item {
+            border: none;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .accordion-button {
+            padding: 20px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            background-color: white;
+            color: var(--dark);
+        }
+        
+        .accordion-button:not(.collapsed) {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .accordion-button:focus {
+            box-shadow: none;
+            border-color: rgba(0, 0, 0, 0.125);
+        }
+        
+        .accordion-body {
+            padding: 20px;
+            background-color: white;
+        }
+        
+        /* Footer */
+        .footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 70px 0 20px;
+        }
+        
+        .footer h5 {
+            color: var(--primary);
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        
+        .footer-links {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: var(--light-gray);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+        
+        .social-icons {
+            margin-top: 20px;
+        }
+        
+        .social-icons a {
+            display: inline-block;
+            width: 36px;
+            height: 36px;
+            background-color: #333;
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 36px;
+            margin-right: 10px;
+            transition: all 0.3s;
+        }
+        
+        .social-icons a:hover {
+            background-color: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid #444;
+            padding-top: 20px;
+            margin-top: 30px;
+            text-align: center;
+            color: var(--gray);
+        }
+        
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .hero {
+                padding: 70px 0;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .promotion-card .card-title {
+                font-size: 1.3rem;
+            }
+            
+            .vip-level {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">LIZ BETTING</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Sports</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Live Betting</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="casino.html">Casino</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="promotions.html">Promotions</a>
+                    </li>
+                </ul>
+                <div class="ms-3">
+                    <button class="btn btn-outline-light me-2">Login</button>
+                    <button class="btn btn-primary">Register</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h1>Exclusive Promotions</h1>
+                    <p class="lead">Boost your bankroll with our generous bonuses and promotions</p>
+                    <p>New players get up to $1,000 in welcome bonuses and free bets!</p>
+                    <button class="btn btn-primary btn-lg">Claim Your Bonus</button>
+                </div>
+                <div class="col-lg-6">
+                    <img src="/placeholder.svg?height=400&width=600" alt="Promotions" class="img-fluid rounded shadow mt-4 mt-lg-0">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Promotions -->
+    <section class="featured-promotions">
+        <div class="container">
+            <h2 class="section-title">Featured Promotions</h2>
+            <div class="row">
+                <div class="col-lg-6 mb-4">
+                    <div class="card promotion-card">
+                        <span class="badge-featured">FEATURED</span>
+                        <div class="card-header">
+                            <h3 class="card-title">Welcome Bonus Package</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="promo-icon">
+                                <i class="fas fa-gift"></i>
+                            </div>
+                            <p class="promo-description">Get a 100% match bonus up to $500 on your first deposit, plus 100 free spins on selected slots!</p>
+                            <p class="promo-terms">Min deposit: $20. Wagering requirement: 35x. Free spins valid for 7 days.</p>
+                            <span class="promo-expiry"><i class="far fa-clock me-2"></i>Valid until: December 31, 2023</span>
+                            <div class="text-center mt-4">
+                                <button class="btn-claim">Claim Now</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mb-4">
+                    <div class="card promotion-card">
+                        <div class="card-header">
+                            <h3 class="card-title">Sports Welcome Offer</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="promo-icon">
+                                <i class="fas fa-futbol"></i>
+                            </div>
+                            <p class="promo-description">Bet $50 on any sports event and get $50 in free bets, regardless of the outcome of your first bet!</p>
+                            <p class="promo-terms">Min odds: 1.5. Free bets valid for 14 days. Cannot be combined with other offers.</p>
+                            <span class="promo-expiry"><i class="far fa-clock me-2"></i>Valid until: December 31, 2023</span>
+                            <div class="text-center mt-4">
+                                <button class="btn-claim">Claim Now</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- All Promotions -->
+    <section class="all-promotions">
+        <div class="container">
+            <h2 class="section-title">All Promotions</h2>
+            <div class="row">
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card promotion-card">
+                        <div class="card-header">
+                            <h3 class="card-title">Weekly Reload</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="promo-icon">
+                                <i class="fas fa-sync-alt"></i>
+                            </div>
+                            <p class="promo-description">Get a 50% reload bonus up to $100 every weekend on your deposits!</p>
+                            <p class="promo-terms">Min deposit: $20. Wagering requirement: 25x. Valid Friday to Sunday.</p>
+                            <div class="text-center mt-4">
+                                <button class="btn-claim">Claim Now</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card promotion-card">
+                        <div class="card-header">
+                            <h3 class="card-title">Cashback Tuesday</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="promo-icon">
+                                <i class="fas fa-hand-holding-usd"></i>
+                            </div>
+                            <p class="promo-description">Get 10% cashback up to $200 on all your net losses every Tuesday!</p>
+                            <p class="promo-terms">Min qualifying loss: $50. Cashback credited as bonus with 1x wagering.</p>
+                            <div class="text-center mt-4">
+                                <button class="btn-claim">Claim Now</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card promotion-card">
+                        <div class="card-header">
+                            <h3 class="card-title">Free Spins Friday</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="promo-icon">
+                                <i class="fas fa-dice"></i>
+                            </div>
+                            <p class="promo-description">Deposit $50 or more on Friday and get 50 free spins on our featured slot game!</p>
+                            <p class="promo-terms">Free spins valid for 3 days. Winnings subject to 20x wagering.</p>
+                            <div class="text-center mt-4">
+                                <button class="btn-claim">Claim Now</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card promotion-card">
+                        <div class="card-header">
+                            <h3 class="card-title">Refer a Friend</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="promo-icon">
+                                <i class="fas fa-user-friends"></i>
+                            </div>
+                            <p class="promo-description">Get $50 for each friend you refer to Liz Betting who makes a deposit!</p>
+                            <p class="promo-terms">Friend must deposit min $20. Bonus subject to 15x wagering requirement.</p>
+                            <div class="text-center mt-4">
+                                <button class="btn-claim">Refer Now</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card promotion-card">
+                        <div class="card-header">
+                            <h3 class="card-title">Accumulator Boost</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="promo-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <p class="promo-description">Get up to 70% extra winnings on your successful accumulator bets!</p>
+                            <p class="promo-terms">Min 3 selections. Min odds per selection: 1.3. Max boost: $10,000.</p>
+                            <div class="text-center mt-4">
+                                <button class="btn-claim">Claim Now</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card promotion-card">
+                        <div class="card-header">
+                            <h3 class="card-title">Live Casino Cashback</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="promo-icon">
+                                <i class="fas fa-user-tie"></i>
+                            </div>
+                            <p class="promo-description">Get 15% weekly cashback up to $300 on all your live casino losses!</p>
+                            <p class="promo-terms">Min qualifying loss: $100. Cashback calculated Monday to Sunday.</p>
+                            <div class="text-center mt-4">
+                                <button class="btn-claim">Claim Now</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- VIP Program -->
+    <section class="vip-section">
+        <div class="container">
+            <h2 class="section-title">VIP Program</h2>
+            <p class="mb-5">Join our exclusive VIP program and enjoy premium benefits tailored to your playing style.</p>
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="vip-card">
+                        <div class="vip-level">Silver</div>
+                        <ul class="vip-benefits">
+                            <li><i class="fas fa-check-circle"></i> Personal account manager</li>
+                            <li><i class="fas fa-check-circle"></i> Weekly cashback up to 5%</li>
+                            <li><i class="fas fa-check-circle"></i> Faster withdrawals</li>
+                            <li><i class="fas fa-check-circle"></i> Birthday bonus</li>
+                        </ul>
+                        <button class="btn-vip">Learn More</button>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="vip-card">
+                        <div class="vip-level">Gold</div>
+                        <ul class="vip-benefits">
+                            <li><i class="fas fa-check-circle"></i> All Silver benefits</li>
+                            <li><i class="fas fa-check-circle"></i> Weekly cashback up to 10%</li>
+                            <li><i class="fas fa-check-circle"></i> Exclusive promotions</li>
+                            <li><i class="fas fa-check-circle"></i> Higher deposit limits</li>
+                            <li><i class="fas fa-check-circle"></i> Monthly free bets</li>
+                        </ul>
+                        <button class="btn-vip">Learn More</button>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="vip-card">
+                        <div class="vip-level">Platinum</div>
+                        <ul class="vip-benefits">
+                            <li><i class="fas fa-check-circle"></i> All Gold benefits</li>
+                            <li><i class="fas fa-check-circle"></i> Weekly cashback up to 20%</li>
+                            <li><i class="fas fa-check-circle"></i> Luxury gifts and rewards</li>
+                            <li><i class="fas fa-check-circle"></i> Invitations to VIP events</li>
+                            <li><i class="fas fa-check-circle"></i> Personalized bonuses</li>
+                            <li><i class="fas fa-check-circle"></i> Dedicated VIP hotline</li>
+                        </ul>
+                        <button class="btn-vip">Learn More</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How to Claim -->
+    <section class="how-to-claim">
+        <div class="container">
+            <h2 class="section-title">How to Claim Your Bonus</h2>
+            <div class="row mt-5">
+                <div class="col-md-3 mb-4">
+                    <div class="step-card">
+                        <div class="step-number">1</div>
+                        <div class="step-title">Register</div>
+                        <p>Create your account on Liz Betting in just a few simple steps.</p>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <div class="step-card">
+                        <div class="step-number">2</div>
+                        <div class="step-title">Deposit</div>
+                        <p>Make a qualifying deposit using your preferred payment method.</p>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <div class="step-card">
+                        <div class="step-number">3</div>
+                        <div class="step-title">Claim</div>
+                        <p>Select your bonus from the promotions page or enter a bonus code if required.</p>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <div class="step-card">
+                        <div class="step-number">4</div>
+                        <div class="step-title">Play</div>
+                        <p>Start playing and enjoy your bonus funds and free bets!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <div class="container">
+            <h2 class="section-title">What Our Players Say</h2>
+            <div class="row mt-4">
+                <div class="col-md-4 mb-4">
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">I claimed the welcome bonus and turned it into a massive win on Starburst! The wagering requirements were fair and the support team was very helpful.</p>
+                        <div class="testimonial-author">
+                            <img src="/placeholder.svg?height=50&width=50" alt="User" class="testimonial-avatar">
+                            <div>
+                                <p class="testimonial-name">Michael R.</p>
+                                <p class="testimonial-won">Won $2,450</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">The weekly cashback saved me during a bad run. It's great to know that even when luck isn't on your side, Liz Betting has your back!</p>
+                        <div class="testimonial-author">
+                            <img src="/placeholder.svg?height=50&width=50" alt="User" class="testimonial-avatar">
+                            <div>
+                                <p class="testimonial-name">Sarah T.</p>
+                                <p class="testimonial-won">VIP Gold Member</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">The accumulator boost is amazing! My 5-fold bet got a 40% boost and I ended up winning much more than I expected. Definitely recommend!</p>
+                        <div class="testimonial-author">
+                            <img src="/placeholder.svg?height=50&width=50" alt="User" class="testimonial-avatar">
+                            <div>
+                                <p class="testimonial-name">David L.</p>
+                                <p class="testimonial-won">Won $3,780</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="container">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            <div class="row mt-4">
+                <div class="col-lg-8 mx-auto">
+                    <div class="accordion" id="faqAccordion">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingOne">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    How do I claim the welcome bonus?
+                                </button>
+                            </h2>
+                            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    To claim the welcome bonus, simply register an account, make a qualifying deposit of at least $20, and the bonus will be automatically credited to your account. For some promotions, you may need to enter a bonus code during the deposit process or contact customer support.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingTwo">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    What are wagering requirements?
+                                </button>
+                            </h2>
+                            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Wagering requirements refer to the number of times you need to bet the bonus amount before you can withdraw any winnings associated with it. For example, if you receive a $100 bonus with a 35x wagering requirement, you'll need to place bets totaling $3,500 before you can withdraw your winnings.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingThree">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                    Can I claim multiple promotions at once?
+                                </button>
+                            </h2>
+                            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    In most cases, you can only have one active bonus at a time. You need to complete the wagering requirements of your current bonus before claiming another one. However, some promotions like the VIP program benefits can be enjoyed alongside other bonuses. Always check the specific terms and conditions of each promotion.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingFour">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                    How do I qualify for the VIP program?
+                                </button>
+                            </h2>
+                            <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Our VIP program is based on your activity and loyalty. As you play and wager on our platform, you'll earn loyalty points that determine your VIP level. Silver status is typically achieved within a few weeks of regular play. For higher levels, our VIP team may also personally invite players who show consistent activity and higher deposits.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingFive">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                                    What happens if I don't meet the wagering requirements?
+                                </button>
+                            </h2>
+                            <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    If you request a withdrawal before meeting the wagering requirements, any remaining bonus funds and associated winnings will be forfeited. You can always check your bonus status and remaining wagering requirements in the "My Bonuses" section of your account.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <h5>LIZ BETTING</h5>
+                    <p>Your premier destination for sports betting and casino games. Bet responsibly.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-2 mb-4">
+                    <h5>Betting</h5>
+                    <ul class="footer-links">
+                        <li><a href="#">Sports</a></li>
+                        <li><a href="#">Live Betting</a></li>
+                        <li><a href="#">Casino</a></li>
+                        <li><a href="#">Live Casino</a></li>
+                        <li><a href="#">Poker</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-2 mb-4">
+                    <h5>Quick Links</h5>
+                    <ul class="footer-links">
+                        <li><a href="#">Promotions</a></li>
+                        <li><a href="#">VIP Program</a></li>
+                        <li><a href="#">Affiliate Program</a></li>
+                        <li><a href="#">Results</a></li>
+                        <li><a href="#">Statistics</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5>Support</h5>
+                    <ul class="footer-links">
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Responsible Gambling</a></li>
+                        <li><a href="#">Terms & Conditions</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2023 Liz Betting. All rights reserved. 18+ Gamble Responsibly.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

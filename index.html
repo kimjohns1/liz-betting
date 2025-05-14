@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Liz Betting - Sports Betting & Casino</title>
+    <title>Liz Betting - Casino Games</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
@@ -115,84 +115,69 @@
             padding: 50px 0;
         }
         
-        /* Bet Card Styles */
-        .bet-card {
+        /* Casino Game Card Styles */
+        .game-card {
             border: none;
             border-radius: 10px;
             overflow: hidden;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s, box-shadow 0.3s;
             height: 100%;
+            position: relative;
         }
         
-        .bet-card:hover {
+        .game-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
         }
         
-        .card-header {
-            background-color: var(--dark);
+        .game-card img {
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .game-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0) 60%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 20px;
             color: white;
-            padding: 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
         }
         
-        .sport-type {
-            font-weight: 500;
-        }
-        
-        .teams {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-        
-        .team {
-            text-align: center;
-            flex: 1;
-        }
-        
-        .team-name {
-            font-weight: 600;
-            font-size: 1.1rem;
-        }
-        
-        .vs {
-            margin: 0 15px;
-            color: var(--gray);
+        .game-title {
             font-weight: 700;
+            font-size: 1.3rem;
+            margin-bottom: 5px;
         }
         
-        .odds-container {
-            display: flex;
-            justify-content: space-between;
+        .game-provider {
+            font-size: 0.9rem;
+            color: var(--light-gray);
+            margin-bottom: 10px;
         }
         
-        .odds-btn {
-            flex: 1;
-            margin: 0 5px;
-            position: relative;
-            border-color: var(--primary-light);
-            color: var(--dark);
-        }
-        
-        .odds-btn:hover {
+        .play-btn {
             background-color: var(--primary);
-            border-color: var(--primary);
             color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 8px 15px;
+            font-weight: 600;
+            transition: background-color 0.3s;
         }
         
-        .odds {
-            display: block;
-            font-weight: 700;
-            margin-top: 5px;
+        .play-btn:hover {
+            background-color: var(--primary-dark);
         }
         
-        /* Sports Categories */
-        .sport-category {
+        /* Game Categories */
+        .game-category {
             background-color: white;
             border-radius: 10px;
             padding: 20px 15px;
@@ -204,66 +189,107 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            cursor: pointer;
         }
         
-        .sport-category:hover {
+        .game-category:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
             background-color: var(--primary);
             color: white;
         }
         
-        .sport-category i {
+        .game-category i {
             font-size: 2.5rem;
             margin-bottom: 15px;
             color: var(--primary);
         }
         
-        .sport-category:hover i {
+        .game-category:hover i {
             color: white;
         }
         
-        .sport-category span {
+        .game-category span {
             font-weight: 600;
         }
         
-        /* Live Betting */
-        .live-betting {
+        /* Live Casino */
+        .live-casino {
             background-color: var(--dark);
             color: white;
         }
         
-        .section-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-        }
-        
-        .live-indicator {
-            display: flex;
-            align-items: center;
-            font-weight: 600;
-            color: var(--secondary);
-        }
-        
-        .pulse {
-            display: inline-block;
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background-color: #ff4d4d;
-            margin-right: 10px;
+        .dealer-card {
+            border: none;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+            height: 100%;
             position: relative;
         }
         
-        .pulse::before {
+        .dealer-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+        
+        .dealer-card img {
+            height: 250px;
+            object-fit: cover;
+        }
+        
+        .dealer-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0));
+            padding: 20px;
+            color: white;
+        }
+        
+        .dealer-name {
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+        
+        .game-type {
+            font-size: 0.9rem;
+            color: var(--primary-light);
+        }
+        
+        .live-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background-color: rgba(255, 0, 0, 0.8);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+        }
+        
+        .live-pulse {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: white;
+            margin-right: 5px;
+            position: relative;
+        }
+        
+        .live-pulse::before {
             content: '';
             position: absolute;
             width: 100%;
             height: 100%;
             border-radius: 50%;
-            background-color: rgba(255, 77, 77, 0.7);
+            background-color: rgba(255, 255, 255, 0.7);
             animation: pulse 1.5s infinite;
         }
         
@@ -278,31 +304,29 @@
             }
         }
         
-        .live-table {
+        /* Jackpot Section */
+        .jackpot-section {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
             color: white;
+            padding: 50px 0;
         }
         
-        .live-table th {
-            border-color: #444;
-            color: var(--light-gray);
-            font-weight: 500;
-        }
-        
-        .live-table td {
-            border-color: #444;
-            vertical-align: middle;
-        }
-        
-        .sport-icon {
-            display: inline-block;
-            width: 30px;
+        .jackpot-container {
             text-align: center;
-            margin-right: 10px;
-            color: var(--primary);
         }
         
-        .event-name {
-            font-weight: 500;
+        .jackpot-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        
+        .jackpot-amount {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--secondary);
+            margin-bottom: 30px;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
         }
         
         /* Promotions */
@@ -415,13 +439,12 @@
                 font-size: 1.8rem;
             }
             
-            .team-name {
-                font-size: 0.9rem;
+            .jackpot-title {
+                font-size: 2rem;
             }
             
-            .odds-btn {
-                padding: 0.375rem 0.5rem;
-                font-size: 0.875rem;
+            .jackpot-amount {
+                font-size: 2.5rem;
             }
         }
     </style>
@@ -437,7 +460,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" href="#">Home</a>
+                        <a class="nav-link" href="index.html">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Sports</a>
@@ -446,7 +469,7 @@
                         <a class="nav-link" href="#">Live Betting</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Casino</a>
+                        <a class="nav-link active" href="casino.html">Casino</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Promotions</a>
@@ -465,198 +488,222 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-6">
-                    <h1>Welcome to Liz Betting</h1>
-                    <p class="lead">Your premier destination for sports betting and casino games</p>
-                    <p>New users get up to $250 bonus on first deposit!</p>
-                    <button class="btn btn-primary btn-lg">Start Betting Now</button>
+                    <h1>Liz Casino Games</h1>
+                    <p class="lead">Experience the thrill of our premium online casino</p>
+                    <p>New players get 100 free spins and a 200% bonus on first deposit!</p>
+                    <button class="btn btn-primary btn-lg">Play Now</button>
                 </div>
                 <div class="col-lg-6">
-                    <img src="/placeholder.svg?height=400&width=600" alt="Sports Betting" class="img-fluid rounded shadow mt-4 mt-lg-0">
+                    <img src="/placeholder.svg?height=400&width=600" alt="Casino Games" class="img-fluid rounded shadow mt-4 mt-lg-0">
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Featured Bets -->
-    <section class="featured-bets">
+    <!-- Game Categories -->
+    <section class="game-categories">
         <div class="container">
-            <h2 class="section-title">Featured Bets</h2>
-            <div class="row">
-                <div class="col-md-4 mb-4">
-                    <div class="card bet-card">
-                        <div class="card-header">
-                            <span class="badge bg-danger">LIVE</span>
-                            <span class="sport-type">Football</span>
-                        </div>
-                        <div class="card-body">
-                            <div class="teams">
-                                <div class="team">
-                                    <span class="team-name">Arsenal</span>
-                                </div>
-                                <div class="vs">VS</div>
-                                <div class="team">
-                                    <span class="team-name">Chelsea</span>
-                                </div>
-                            </div>
-                            <div class="odds-container mt-3">
-                                <button class="btn btn-outline-primary odds-btn">1 <span class="odds">2.25</span></button>
-                                <button class="btn btn-outline-primary odds-btn">X <span class="odds">3.20</span></button>
-                                <button class="btn btn-outline-primary odds-btn">2 <span class="odds">2.90</span></button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-4">
-                    <div class="card bet-card">
-                        <div class="card-header">
-                            <span class="badge bg-success">UPCOMING</span>
-                            <span class="sport-type">Basketball</span>
-                        </div>
-                        <div class="card-body">
-                            <div class="teams">
-                                <div class="team">
-                                    <span class="team-name">Golden State</span>
-                                </div>
-                                <div class="vs">VS</div>
-                                <div class="team">
-                                    <span class="team-name">Brooklyn</span>
-                                </div>
-                            </div>
-                            <div class="odds-container mt-3">
-                                <button class="btn btn-outline-primary odds-btn">1 <span class="odds">1.75</span></button>
-                                <button class="btn btn-outline-primary odds-btn">2 <span class="odds">2.05</span></button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-4">
-                    <div class="card bet-card">
-                        <div class="card-header">
-                            <span class="badge bg-success">UPCOMING</span>
-                            <span class="sport-type">Tennis</span>
-                        </div>
-                        <div class="card-body">
-                            <div class="teams">
-                                <div class="team">
-                                    <span class="team-name">Alcaraz</span>
-                                </div>
-                                <div class="vs">VS</div>
-                                <div class="team">
-                                    <span class="team-name">Sinner</span>
-                                </div>
-                            </div>
-                            <div class="odds-container mt-3">
-                                <button class="btn btn-outline-primary odds-btn">1 <span class="odds">1.95</span></button>
-                                <button class="btn btn-outline-primary odds-btn">2 <span class="odds">1.85</span></button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Sports Categories -->
-    <section class="sports-categories bg-light">
-        <div class="container">
-            <h2 class="section-title">Sports Categories</h2>
+            <h2 class="section-title">Game Categories</h2>
             <div class="row">
                 <div class="col-6 col-md-3 col-lg-2 mb-4">
-                    <div class="sport-category">
-                        <i class="fas fa-futbol"></i>
-                        <span>Football</span>
+                    <div class="game-category">
+                        <i class="fas fa-dice"></i>
+                        <span>Slots</span>
                     </div>
                 </div>
                 <div class="col-6 col-md-3 col-lg-2 mb-4">
-                    <div class="sport-category">
-                        <i class="fas fa-basketball-ball"></i>
-                        <span>Basketball</span>
+                    <div class="game-category">
+                        <i class="fas fa-coins"></i>
+                        <span>Jackpots</span>
                     </div>
                 </div>
                 <div class="col-6 col-md-3 col-lg-2 mb-4">
-                    <div class="sport-category">
-                        <i class="fas fa-baseball-ball"></i>
-                        <span>Baseball</span>
+                    <div class="game-category">
+                        <i class="fas fa-user-tie"></i>
+                        <span>Live Dealers</span>
                     </div>
                 </div>
                 <div class="col-6 col-md-3 col-lg-2 mb-4">
-                    <div class="sport-category">
-                        <i class="fas fa-table-tennis"></i>
-                        <span>Tennis</span>
+                    <div class="game-category">
+                        <i class="fas fa-table"></i>
+                        <span>Table Games</span>
                     </div>
                 </div>
                 <div class="col-6 col-md-3 col-lg-2 mb-4">
-                    <div class="sport-category">
-                        <i class="fas fa-hockey-puck"></i>
-                        <span>Hockey</span>
+                    <div class="game-category">
+                        <i class="fas fa-spade"></i>
+                        <span>Poker</span>
                     </div>
                 </div>
                 <div class="col-6 col-md-3 col-lg-2 mb-4">
-                    <div class="sport-category">
-                        <i class="fas fa-golf-ball"></i>
-                        <span>Golf</span>
+                    <div class="game-category">
+                        <i class="fas fa-gamepad"></i>
+                        <span>Game Shows</span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Live Betting -->
-    <section class="live-betting">
+    <!-- Featured Games -->
+    <section class="featured-games">
         <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Live Betting</h2>
-                <span class="live-indicator">
-                    <span class="pulse"></span> LIVE NOW
-                </span>
-            </div>
-            <div class="table-responsive">
-                <table class="table live-table">
-                    <thead>
-                        <tr>
-                            <th>Event</th>
-                            <th>Time</th>
-                            <th>Score</th>
-                            <th colspan="3">Odds</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>
-                                <span class="sport-icon"><i class="fas fa-futbol"></i></span>
-                                <span class="event-name">Bayern Munich vs PSG</span>
-                            </td>
-                            <td>72'</td>
-                            <td>2-1</td>
-                            <td><button class="btn btn-sm btn-outline-primary">1 <span class="odds">1.45</span></button></td>
-                            <td><button class="btn btn-sm btn-outline-primary">X <span class="odds">4.50</span></button></td>
-                            <td><button class="btn btn-sm btn-outline-primary">2 <span class="odds">7.20</span></button></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <span class="sport-icon"><i class="fas fa-basketball-ball"></i></span>
-                                <span class="event-name">Lakers vs Celtics</span>
-                            </td>
-                            <td>Q3</td>
-                            <td>78-72</td>
-                            <td><button class="btn btn-sm btn-outline-primary">1 <span class="odds">1.65</span></button></td>
-                            <td colspan="2"><button class="btn btn-sm btn-outline-primary">2 <span class="odds">2.25</span></button></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <span class="sport-icon"><i class="fas fa-table-tennis"></i></span>
-                                <span class="event-name">Medvedev vs Zverev</span>
-                            </td>
-                            <td>Set 3</td>
-                            <td>1-1</td>
-                            <td><button class="btn btn-sm btn-outline-primary">1 <span class="odds">2.10</span></button></td>
-                            <td colspan="2"><button class="btn btn-sm btn-outline-primary">2 <span class="odds">1.70</span></button></td>
-                        </tr>
-                    </tbody>
-                </table>
+            <h2 class="section-title">Featured Games</h2>
+            <div class="row">
+                <div class="col-md-4 col-lg-3 mb-4">
+                    <div class="game-card">
+                        <img src="/placeholder.svg?height=200&width=300" alt="Starburst" class="img-fluid">
+                        <div class="game-overlay">
+                            <div class="game-title">Starburst</div>
+                            <div class="game-provider">NetEnt</div>
+                            <button class="play-btn">Play Now</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-lg-3 mb-4">
+                    <div class="game-card">
+                        <img src="/placeholder.svg?height=200&width=300" alt="Book of Dead" class="img-fluid">
+                        <div class="game-overlay">
+                            <div class="game-title">Book of Dead</div>
+                            <div class="game-provider">Play'n GO</div>
+                            <button class="play-btn">Play Now</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-lg-3 mb-4">
+                    <div class="game-card">
+                        <img src="/placeholder.svg?height=200&width=300" alt="Gonzo's Quest" class="img-fluid">
+                        <div class="game-overlay">
+                            <div class="game-title">Gonzo's Quest</div>
+                            <div class="game-provider">NetEnt</div>
+                            <button class="play-btn">Play Now</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-lg-3 mb-4">
+                    <div class="game-card">
+                        <img src="/placeholder.svg?height=200&width=300" alt="Sweet Bonanza" class="img-fluid">
+                        <div class="game-overlay">
+                            <div class="game-title">Sweet Bonanza</div>
+                            <div class="game-provider">Pragmatic Play</div>
+                            <button class="play-btn">Play Now</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-lg-3 mb-4">
+                    <div class="game-card">
+                        <img src="/placeholder.svg?height=200&width=300" alt="Mega Moolah" class="img-fluid">
+                        <div class="game-overlay">
+                            <div class="game-title">Mega Moolah</div>
+                            <div class="game-provider">Microgaming</div>
+                            <button class="play-btn">Play Now</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-lg-3 mb-4">
+                    <div class="game-card">
+                        <img src="/placeholder.svg?height=200&width=300" alt="Blackjack" class="img-fluid">
+                        <div class="game-overlay">
+                            <div class="game-title">Blackjack Pro</div>
+                            <div class="game-provider">Evolution Gaming</div>
+                            <button class="play-btn">Play Now</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-lg-3 mb-4">
+                    <div class="game-card">
+                        <img src="/placeholder.svg?height=200&width=300" alt="European Roulette" class="img-fluid">
+                        <div class="game-overlay">
+                            <div class="game-title">European Roulette</div>
+                            <div class="game-provider">Playtech</div>
+                            <button class="play-btn">Play Now</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-lg-3 mb-4">
+                    <div class="game-card">
+                        <img src="/placeholder.svg?height=200&width=300" alt="Poker" class="img-fluid">
+                        <div class="game-overlay">
+                            <div class="game-title">Texas Hold'em</div>
+                            <div class="game-provider">PokerStars</div>
+                            <button class="play-btn">Play Now</button>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="text-center mt-4">
-                <button class="btn btn-outline-light">View All Live Events</button>
+                <button class="btn btn-primary">View All Games</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Jackpot Section -->
+    <section class="jackpot-section">
+        <div class="container">
+            <div class="jackpot-container">
+                <h2 class="jackpot-title">Current Progressive Jackpot</h2>
+                <div class="jackpot-amount">$1,456,789</div>
+                <button class="btn btn-lg" style="background-color: var(--secondary); color: white; font-weight: 600;">Play Jackpot Games</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Live Casino -->
+    <section class="live-casino">
+        <div class="container">
+            <h2 class="section-title">Live Casino</h2>
+            <div class="row">
+                <div class="col-md-6 col-lg-3 mb-4">
+                    <div class="dealer-card">
+                        <img src="/placeholder.svg?height=250&width=300" alt="Live Blackjack" class="img-fluid">
+                        <div class="live-badge">
+                            <span class="live-pulse"></span> LIVE
+                        </div>
+                        <div class="dealer-info">
+                            <div class="dealer-name">Sophia</div>
+                            <div class="game-type">Blackjack</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 mb-4">
+                    <div class="dealer-card">
+                        <img src="/placeholder.svg?height=250&width=300" alt="Live Roulette" class="img-fluid">
+                        <div class="live-badge">
+                            <span class="live-pulse"></span> LIVE
+                        </div>
+                        <div class="dealer-info">
+                            <div class="dealer-name">James</div>
+                            <div class="game-type">Roulette</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 mb-4">
+                    <div class="dealer-card">
+                        <img src="/placeholder.svg?height=250&width=300" alt="Live Baccarat" class="img-fluid">
+                        <div class="live-badge">
+                            <span class="live-pulse"></span> LIVE
+                        </div>
+                        <div class="dealer-info">
+                            <div class="dealer-name">Emma</div>
+                            <div class="game-type">Baccarat</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 mb-4">
+                    <div class="dealer-card">
+                        <img src="/placeholder.svg?height=250&width=300" alt="Live Poker" class="img-fluid">
+                        <div class="live-badge">
+                            <span class="live-pulse"></span> LIVE
+                        </div>
+                        <div class="dealer-info">
+                            <div class="dealer-name">Michael</div>
+                            <div class="game-type">Poker</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <button class="btn btn-outline-light">View All Live Games</button>
             </div>
         </div>
     </section>
@@ -664,13 +711,13 @@
     <!-- Promotions -->
     <section class="promotions">
         <div class="container">
-            <h2 class="section-title">Promotions</h2>
+            <h2 class="section-title">Casino Promotions</h2>
             <div class="row">
                 <div class="col-md-6 mb-4">
                     <div class="card promo-card">
                         <div class="card-body">
-                            <h3>Welcome Bonus</h3>
-                            <p>Get 100% bonus up to $250 on your first deposit!</p>
+                            <h3>Casino Welcome Package</h3>
+                            <p>Get 200% bonus up to $500 + 100 free spins on your first deposit!</p>
                             <button class="btn">Claim Now</button>
                         </div>
                     </div>
@@ -678,9 +725,9 @@
                 <div class="col-md-6 mb-4">
                     <div class="card promo-card">
                         <div class="card-body">
-                            <h3>Refer a Friend</h3>
-                            <p>Get $50 for each friend you refer to Liz Betting!</p>
-                            <button class="btn">Refer Now</button>
+                            <h3>Weekend Reload Bonus</h3>
+                            <p>Get 50% bonus up to $200 every weekend on your deposits!</p>
+                            <button class="btn">Claim Now</button>
                         </div>
                     </div>
                 </div>
@@ -702,23 +749,23 @@
                     </div>
                 </div>
                 <div class="col-md-2 mb-4">
-                    <h5>Sports</h5>
+                    <h5>Casino</h5>
                     <ul class="footer-links">
-                        <li><a href="#">Football</a></li>
-                        <li><a href="#">Basketball</a></li>
-                        <li><a href="#">Tennis</a></li>
-                        <li><a href="#">Baseball</a></li>
-                        <li><a href="#">Hockey</a></li>
+                        <li><a href="#">Slots</a></li>
+                        <li><a href="#">Table Games</a></li>
+                        <li><a href="#">Live Casino</a></li>
+                        <li><a href="#">Jackpots</a></li>
+                        <li><a href="#">Game Shows</a></li>
                     </ul>
                 </div>
                 <div class="col-md-2 mb-4">
                     <h5>Quick Links</h5>
                     <ul class="footer-links">
+                        <li><a href="#">Sports Betting</a></li>
                         <li><a href="#">Live Betting</a></li>
-                        <li><a href="#">Casino</a></li>
                         <li><a href="#">Promotions</a></li>
-                        <li><a href="#">Results</a></li>
-                        <li><a href="#">Statistics</a></li>
+                        <li><a href="#">VIP Program</a></li>
+                        <li><a href="#">Tournaments</a></li>
                     </ul>
                 </div>
                 <div class="col-md-4 mb-4">
